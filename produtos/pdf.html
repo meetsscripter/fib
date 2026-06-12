@@ -2,8 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>FBI Business Permit - Model</title>
-  <!-- Adicionando fontes do Google para um visual mais moderno -->
+  <title>FBI Operation Order - Model</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Georgia&display=swap" rel="stylesheet">
   <style>
     body {
@@ -34,7 +33,6 @@
     }
 
     .form-container h2 {
-      font-family: 'Roboto', sans-serif;
       margin-top: 0;
       margin-bottom: 25px;
       font-weight: 700;
@@ -54,7 +52,7 @@
       user-select: none;
     }
 
-    input[type="text"], input[type="tel"], input[type="date"], select {
+    input[type="text"], input[type="file"], input[type="date"], select {
       width: 100%;
       padding: 10px 12px;
       margin-top: 6px;
@@ -63,13 +61,17 @@
       border-radius: 6px;
       font-family: 'Roboto', sans-serif;
       box-sizing: border-box;
-      transition: border-color 0.3s, box-shadow 0.3s;
+      transition: border-color 0.3s;
       background-color: #fcfcfc;
     }
 
-    input[type="text"]:focus, input[type="tel"]:focus, input[type="date"]:focus, select:focus {
+    input[type="file"] {
+      padding: 7px 12px;
+      cursor: pointer;
+    }
+
+    input[type="text"]:focus, input[type="date"]:focus, select:focus {
       border-color: #0056b3;
-      box-shadow: 0 0 0 3px rgba(0,86,179,0.15);
       outline: none;
     }
 
@@ -90,7 +92,7 @@
       width: 100%;
       margin: 30px auto 0;
       padding: 15px;
-      background: #002d62; /* Azul FBI */
+      background: #002d62;
       color: white;
       border: none;
       border-radius: 8px;
@@ -99,36 +101,31 @@
       text-transform: uppercase;
       letter-spacing: 1px;
       cursor: pointer;
-      transition: background-color 0.3s, transform 0.1s;
+      transition: background-color 0.3s;
       user-select: none;
       box-shadow: 0 4px 6px rgba(0,0,0,0.2);
     }
     #btn-gerar:hover {
       background: #001f44;
     }
-    #btn-gerar:active {
-      transform: translateY(1px);
-    }
 
     /* --- ESTILO DO DOCUMENTO DO FBI (Direita) --- */
     .alvara {
-      width: 850px; /* Um pouco mais largo */
+      width: 850px;
       background: white;
-      padding: 60px 50px; /* Mais respiro */
+      padding: 60px 50px;
       box-sizing: border-box;
       position: relative;
       display: flex;
       flex-direction: column;
       min-height: 1100px;
-      font-family: 'Arial', sans-serif; /* Fonte limpa e oficial */
+      font-family: 'Arial', sans-serif;
       color: #000;
       box-shadow: 0 15px 35px rgba(0,0,0,0.4);
       border: 2px solid #d1d1d1;
-      /* Marca d'água sutil no fundo (opcional, adicionei uma textura leve) */
       background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48ZyBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmMGYwZjAiIGZpbGwtb3BhY2l0eT0iMC40Ij48cGF0aCBkPSJNMCAwaDQwdjQwSDBWMHptMjAgMjBoMjB2MjBIMjBWMjB6TTAgMjBoMjB2MjBIMFYyMHoyMCAwaDIwdjIwSDIwVjB6Ii8+PC9nPjwvZz48L3N2Zz4=');
     }
 
-    /* Faixa dourada e azul no topo */
     .alvara::before {
       content: "";
       position: absolute;
@@ -136,30 +133,30 @@
       left: 0;
       width: 100%;
       height: 12px;
-      background: linear-gradient(90deg, #002d62 0%, #002d62 70%, #b3995d 70%, #b3995d 100%);
+      background: linear-gradient(90deg, #1a1a1a 0%, #1a1a1a 70%, #b3995d 70%, #b3995d 100%);
     }
 
     /* Logos Oficiais */
     .logo-esq {
       position: absolute;
       top: 20px;
-      left: -30px;
-      width: 110px; /* Selo FBI */
+      left: 20px;
+      width: 110px;
       height: auto;
     }
 
     .logo-dir {
       position: absolute;
       top: 20px;
-      right: 10px;
-      width: 100px; /* Selo DoJ */
+      right: 20px;
+      width: 100px;
       height: auto;
     }
 
     /* Cabeçalho Federal */
     .novo-cabecalho {
       text-align: center;
-      margin-bottom: 60px;
+      margin-bottom: 40px;
       user-select: none;
       margin-top: 15px;
       color: #002d62;
@@ -177,6 +174,7 @@
       font-weight: 700;
       font-size: 18px;
       text-transform: uppercase;
+      color: #1a1a1a;
     }
 
     .novo-cabecalho .bureau-name {
@@ -185,6 +183,7 @@
       text-transform: uppercase;
       letter-spacing: 2px;
       margin-top: 8px;
+      color: #002d62;
     }
 
     .novo-cabecalho .titulo {
@@ -202,8 +201,8 @@
     /* Linhas de dados - Estilo Ficha */
     .linha {
       display: flex;
-      gap: 0; /* Unir os blocos */
-      margin-bottom: -1px; /* Sobrepor bordas */
+      gap: 0;
+      margin-bottom: -1px;
       flex-wrap: nowrap;
     }
 
@@ -212,12 +211,11 @@
       min-width: 120px;
       display: flex;
       flex-direction: column;
-      border: 1px solid #ccc; /* Bordas em cada campo */
+      border: 1px solid #ccc;
       padding: 10px 15px;
       background-color: #fff;
     }
 
-    /* Larguras específicas para dar ritmo */
     .bloco-largo { flex: 2; }
     .bloco-curto { flex: 0.7; }
 
@@ -241,16 +239,48 @@
       text-overflow: ellipsis;
     }
 
+    /* CONTAINER DO MAPA DINÂMICO */
+    .container-mapa {
+      margin-top: 30px;
+      border: 2px solid #002d62;
+      background-color: #f0f4f8;
+      border-radius: 6px;
+      padding: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 280px;
+      max-height: 350px;
+      overflow: hidden;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.15);
+    }
+
+    .mapa-imagem {
+      width: 100%;
+      height: 270px;
+      object-fit: cover; /* Recorta o mapa perfeitamente no espaço correto */
+      border-radius: 4px;
+      display: block;
+    }
+
+    .mapa-placeholder {
+      font-weight: 700;
+      color: #888;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
     /* Seção de Texto Legal */
     .observacoes {
       text-align: justify;
-      margin-top: 50px;
+      margin-top: 30px;
       font-size: 14px;
       line-height: 1.6;
       color: #222;
       user-select: none;
       background-color: #f9f9f9;
-      padding: 30px;
+      padding: 25px;
       border: 1px solid #d1d1d1;
       border-radius: 8px;
     }
@@ -264,42 +294,42 @@
 
     .observacoes strong:nth-of-type(1) {
       display: block;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
       border-bottom: 1px solid #ccc;
       padding-bottom: 5px;
     }
 
     .observacoes strong:nth-of-type(2) {
       display: block;
-      margin-top: 30px; 
+      margin-top: 20px; 
       font-weight: 700;
-      color: #a31515; /* Vermelho escuro para ATENÇÃO */
+      color: #a31515;
     }
 
     .observacoes p {
-      margin: 0 0 12px 0;
+      margin: 0 0 10px 0;
     }
     .observacoes p:last-child { margin-bottom: 0; }
 
     .observacoes span {
       display: block;
-      margin-top: 8px;
+      margin-top: 6px;
       font-weight: 400;
       color: #a31515;
     }
 
     /* Assinatura Federal */
     .assinatura-container {
-      margin-top: auto; /* Empurra para baixo */
+      margin-top: auto;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding-top: 30px;
+      padding-top: 25px;
       font-size: 16px;
       font-weight: 400;
       user-select: none;
-      border-top: 1px solid #eee; /* Linha sutil */
+      border-top: 1px solid #eee;
     }
 
     .assinatura-fonte {
@@ -318,7 +348,6 @@
       margin-top: 2px;
     }
 
-    /* Container imagem gerada */
     #imagem-gerada {
       margin-top: 30px;
       text-align: center;
@@ -337,39 +366,38 @@
 </head>
 <body>
 
-  <!-- FORMULÁRIO (ESQUERDA) - FUNCIONALIDADES MANTIDAS -->
   <div class="form-container">
-    <h2>Dados do Permissionário</h2>
+    <h2>Diretrizes da Operação</h2>
 
-    <label for="proprietario">Nome Completo:</label>
-    <input type="text" id="proprietario" placeholder="Ex: John Doe" />
+    <label for="atividade">Nome da Operação (Code Name):</label>
+    <input type="text" id="atividade" placeholder="Ex: Operação Overlord" />
 
-    <label for="rg">Documento de Identidade (RG/ID):</label>
-    <input type="text" id="rg" placeholder="Número do documento" />
+    <label for="rg">Código do Caso (Case ID):</label>
+    <input type="text" id="rg" placeholder="Ex: FBI-TX-7894" />
 
-    <label for="telefone">Telefone de Contato:</label>
-    <input type="tel" id="telefone" placeholder="(xx) xxxx-xxxx" />
+    <label for="proprietario">Agente Especial em Comando:</label>
+    <input type="text" id="proprietario" placeholder="Ex: Fox Mulder" />
 
-    <label for="atividade">Tipo de Atividade Comercial:</label>
-    <input type="text" id="atividade" placeholder="Ex: Consultoria, Varejo..." />
-
-    <label for="endereco">Endereço de Operação:</label>
-    <input type="text" id="endereco" placeholder="Endereço completo" />
+    <label for="endereco">Setor / Local Alvo:</label>
+    <input type="text" id="endereco" placeholder="Coordenadas ou Endereço" />
 
     <div class="linha-assinatura">
       <div>
-        <label for="data">Data de Emissão:</label>
+        <label for="data">Data da Incursão:</label>
         <input type="date" id="data" />
       </div>
       <div>
-        <label for="validade">Data de Validade:</label>
-        <input type="date" id="validade" />
+        <label for="telefone">Horário Alvo (H-Hour):</label>
+        <input type="text" id="telefone" placeholder="Ex: 05:30 AM" />
       </div>
     </div>
 
+    <label for="input-mapa">Anexar Mapa Tático (Imagem):</label>
+    <input type="file" id="input-mapa" accept="image/*" />
+
     <div class="linha-assinatura">
       <div>
-        <label for="nome-assinatura">Autoridade Responsável:</label>
+        <label for="nome-assinatura">Diretor de Autorização:</label>
         <input type="text" id="nome-assinatura" placeholder="Nome para assinatura" />
       </div>
       <div>
@@ -383,92 +411,84 @@
       </div>
     </div>
 
-    <button id="btn-gerar">Gerar Documento Oficial</button>
+    <button id="btn-gerar">Gerar Ordem Tática</button>
   </div>
 
-  <!-- DOCUMENTO FBI (DIREITA) - NOVO LAYOUT -->
   <div class="alvara" id="alvara">
 
-    <!-- Logos Federais -->
-    <img src="https://cdn.pixabay.com/photo/2013/07/12/14/10/pushpin-147918_640.png" alt="FBI Seal" class="logo-esq" />
-    <img src="https://cdn.pixabay.com/photo/2013/07/12/14/10/pushpin-147918_640.png" alt="DoJ Seal" class="logo-dir" />
-    <!-- Cabeçalho Federal -->
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Seal_of_the_Federal_Bureau_of_Investigation.svg/512px-Seal_of_the_Federal_Bureau_of_Investigation.svg.png" alt="FBI Seal" class="logo-esq" crossorigin="anonymous" />
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Seal_of_the_United_States_Department_of_Justice.svg/512px-Seal_of_the_United_States_Department_of_Justice.svg.png" alt="DoJ Seal" class="logo-dir" crossorigin="anonymous" />
+    
     <div class="novo-cabecalho">
       <p class="dept-name">U.S. DEPARTMENT OF JUSTICE</p>
-      <p class="bureau-name">FEDERAL BUREAU OF INVESTIGATION</p>
-      <p class="titulo">BUSINESS OPERATION PERMIT</p>
+      <p class="bureau-name">FEDERAL INVESTIGATION BUREAU</p>
+      <p class="titulo">TACTICAL OPERATION ORDER</p>
     </div>
 
-    <!-- Conteúdo em formato de Ficha (Grid de bordas) -->
     <div class="linha">
       <div class="bloco bloco-largo">
-        <div class="pergunta">PERMISSIONÁRIO / PROPRIETÁRIO:</div>
-        <div class="resposta" id="res-proprietario">J. Edgar Hoover</div>
+        <div class="pergunta">NOME DA OPERAÇÃO / OPERATIONAL CODE NAME:</div>
+        <div class="resposta" id="res-atividade">OPERAÇÃO OVERLORD</div>
       </div>
       <div class="bloco">
-        <div class="pergunta">ID / RG:</div>
-        <div class="resposta" id="res-rg">FED-987.654.321</div>
+        <div class="pergunta">CÓDIGO / CASE ID:</div>
+        <div class="resposta" id="res-rg">CASE-987.654X</div>
       </div>
     </div>
 
     <div class="linha">
       <div class="bloco">
-        <div class="pergunta">TELEFONE:</div>
-        <div class="resposta" id="res-telefone">(202) 324-3000</div>
+        <div class="pergunta">AGENTE EXECUTIVO EM COMANDO / COMMANDER IN CHARGE:</div>
+        <div class="resposta" id="res-proprietario">Special Agent Fox Mulder</div>
       </div>
-      <div class="bloco bloco-largo">
-        <div class="pergunta">ATIVIDADE AUTORIZADA:</div>
-        <div class="resposta" id="res-atividade">Specialized Security Services</div>
+      <div class="bloco bloco-curto">
+        <div class="pergunta">HORÁRIO / H-HOUR:</div>
+        <div class="resposta" id="res-telefone">06:00 AM</div>
       </div>
     </div>
 
     <div class="linha">
       <div class="bloco bloco-largo">
-        <div class="pergunta">ENDEREÇO DE OPERAÇÃO:</div>
-        <div class="resposta" id="res-endereco">935 Pennsylvania Avenue NW, Washington, D.C.</div>
+        <div class="pergunta">PERÍMETRO DE INCURSÃO / TARGET LOCATION:</div>
+        <div class="resposta" id="res-endereco">Sector 7, Los Santos County, San Andreas</div>
       </div>
       <div class="bloco bloco-curto">
-        <div class="pergunta">EMISSÃO:</div>
-        <div class="resposta" id="res-data">10/05/1924</div>
-      </div>
-      <div class="bloco bloco-curto">
-        <div class="pergunta">VALIDADE:</div>
-        <div class="resposta" id="res-validade">UNTIL REVOKED</div>
+        <div class="pergunta">DATA / DATE:</div>
+        <div class="resposta" id="res-data">12/06/2026</div>
       </div>
     </div>
 
-    <!-- Seção de Termos e Condições (Português mantido) -->
+    <div class="container-mapa" id="area-mapa">
+      <span class="mapa-placeholder" id="mapa-status">Nenhum mapa tático anexado</span>
+    </div>
+
     <div class="observacoes">
-      <strong>TERMOS E CONDIÇÕES DE OPERAÇÃO</strong>
-      <p>Este documento constitui uma autorização federal de operação, emitida sob a égide do Departamento de Justiça dos Estados Unidos. A concessão deste alvará está estritamente condicionada à ausência de antecedentes criminais federais ou estaduais por parte de todos os proprietários e diretores da entidade autorizada.</p>
-      <p>O estabelecimento está sujeito a inspeções de segurança aleatórias e sem aviso prévio, conduzidas por agentes especiais do FBI ou técnicos autorizados, para garantir a conformidade com os protocolos de segurança nacional e prevenir atividades ilícitas.</p>
-      <p>É responsabilidade do permissionário manter todos os registros de funcionários e atividades comerciais atualizados e acessíveis à autoridade federal, mediante solicitação formal.</p>
-      <p>Qualquer violação das leis federais, ou a identificação de ameaças à ordem pública e segurança nacional emanadas do estabelecimento, resultará na revogação imediata desta autorização.</p>
-      <p>A taxa administrativa federal para a emissão e processamento deste alvará é de R$ 70.000,00 (setenta mil reais), com validade de 30 dias para a taxa de emissão, exigindo novo recolhimento para fins de renovação.</p>
+      <strong>DIRETRIZES OPERACIONAIS DE ENFORCEMENT</strong>
+      <p>Esta ordem tática formal estabelece autorização expressa e imediata para a execução da incursão de campo no perímetro designado, sob a supervisão do Diretor Executivo Geral do Federal Bureau of Investigation.</p>
+      <p>Todas as equipes táticas (SWAT/HRT) deverão manter comunicação criptografada ativa via canais táticos federais e atuar estritamente dentro das regras de engajamento pré-estabelecidas pelo Departamento de Justiça.</p>
+      <p>O uso de força letal está restrito e condicionado à legítima defesa imediata ou ameaça clara à segurança nacional e à integridade dos agentes da lei envolvidos no perímetro operacional.</p>
 
-      <strong>NOTIFICAÇÃO DE REVOGAÇÃO:</strong>
-      <span>A inobservância de qualquer uma das condições listadas acima resultará no cancelamento automático e imediato deste documento, sem direito a recurso ou reembolso de taxas.</span>
+      <strong>NOTIFICAÇÃO DE ALTA PRIORIDADE:</strong>
+      <span>A quebra de sigilo tático, compartilhamento de coordenadas ou inobservância desta ordem resultará em corte imediato da operação e punição sob as leis de Segurança Nacional dos EUA.</span>
     </div>
 
-    <!-- Assinatura (Fundo) -->
     <div class="assinatura-container">
-      <div class="assinatura-fonte" id="assinatura-texto">Merrick B. Garland</div>
-      <div class="assinatura-cargo">Autoridade Federal Responsável</div>
-      <div style="font-size: 10px; color: #999; margin-top: 5px;">FEDERAL BUREAU OF INVESTIGATION - OFFICIAL RELEASE</div>
+      <div class="assinatura-fonte" id="assinatura-texto">Christopher A. Wray</div>
+      <div class="assinatura-cargo">Diretor Executivo Geral - FBI</div>
+      <div style="font-size: 10px; color: #999; margin-top: 5px;">CLASSIFIED DOCUMENT - INTERNAL USE ONLY</div>
     </div>
 
   </div>
 
-  <!-- Container para a imagem gerada (Abaixo de tudo) -->
   <div id="imagem-gerada"></div>
 
-  <!-- Biblioteca para screenshot -->
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <script>
-    // --- LÓGICA JAVASCRIPT ORIGINAL MANTIDA ---
     const btnGerar = document.getElementById('btn-gerar');
     const alvara = document.getElementById('alvara');
     const imagemGerada = document.getElementById('imagem-gerada');
+    const inputMapa = document.getElementById('input-mapa');
+    const areaMapa = document.getElementById('area-mapa');
 
     // Inputs e áreas para resposta
     const inputs = {
@@ -478,7 +498,6 @@
       atividade: document.getElementById('atividade'),
       endereco: document.getElementById('endereco'),
       data: document.getElementById('data'),
-      validade: document.getElementById('validade'),
       nomeAssinatura: document.getElementById('nome-assinatura'),
       fonteAssinatura: document.getElementById('fonte-assinatura'),
     };
@@ -490,17 +509,29 @@
       atividade: document.getElementById('res-atividade'),
       endereco: document.getElementById('res-endereco'),
       data: document.getElementById('res-data'),
-      validade: document.getElementById('res-validade'),
       assinaturaTexto: document.getElementById('assinatura-texto'),
     };
 
-    // Atualiza respostas no alvará em tempo real
+    // LÓGICA DO UPLOAD DO MAPA: Lê o arquivo e insere no documento oficial
+    inputMapa.addEventListener('change', function() {
+      const arquivo = this.files[0];
+      if (arquivo) {
+        const leitor = new FileReader();
+        leitor.onload = function(e) {
+          areaMapa.innerHTML = ''; // Remove o texto de placeholder
+          const imgMapa = document.createElement('img');
+          imgMapa.src = e.target.result;
+          imgMapa.className = 'mapa-imagem';
+          areaMapa.appendChild(imgMapa);
+        };
+        leitor.readAsDataURL(arquivo);
+      }
+    });
+
+    // Atualiza respostas em tempo real
     Object.keys(inputs).forEach(key => {
       inputs[key].addEventListener('input', () => {
         switch(key) {
-          case 'validade':
-            respostas.validade.textContent = inputs.validade.value ? formatDate(inputs.validade.value) : 'UNTIL REVOKED';
-            break;
           case 'data':
             respostas.data.textContent = inputs.data.value ? formatDate(inputs.data.value) : '';
             break;
@@ -516,57 +547,54 @@
       });
     });
 
-    // Formata data YYYY-MM-DD para DD/MM/YYYY
     function formatDate(data) {
       const d = new Date(data);
       if(isNaN(d)) return '';
-      // Usando formatação local (brasileira) pois o texto legal está em PT-BR
       return ('0' + (d.getDate() + 1)).slice(-2) + '/' + ('0'+(d.getMonth()+1)).slice(-2) + '/' + d.getFullYear();
     }
 
-    // Evento botão gerar imagem
+    // Evento botão gerar imagem com Cópia Automática Integrada
     btnGerar.addEventListener('click', () => {
-      // Rola para o topo para garantir que o html2canvas pegue tudo sem cortes
       window.scrollTo(0, 0);
 
       html2canvas(alvara, {
-        scale: 2, // Alta qualidade
-        useCORS: true, // Tentar carregar imagens externas
-        allowTaint: true,
-        backgroundColor: "#ffffff" // Garante fundo branco na imagem
+        scale: 2, 
+        useCORS: true, 
+        allowTaint: false, // Mantido como false para não invalidar a segurança do Blob na área de transferência
+        backgroundColor: "#ffffff" 
       }).then(canvas => {
-        imagemGerada.innerHTML = ''; // Limpa geração anterior
+        imagemGerada.innerHTML = '';
 
         const img = document.createElement('img');
         img.src = canvas.toDataURL('image/png');
-        img.alt = 'Documento FBI Gerado';
+        img.alt = 'Ordem Operacional FBI';
         img.style.cursor = 'pointer';
         
-        // Mantém a funcionalidade de abrir em nova aba
         img.addEventListener('click', () => {
           const novaAba = window.open();
           novaAba.document.write('<img src="' + img.src + '" style="max-width:100%;">');
         });
 
         imagemGerada.appendChild(img);
-        // Copiar para a área de transferência do usuário automaticamente
+
+        // Copiar imagem automaticamente para área de transferência do usuário
         canvas.toBlob(blob => {
           if (blob) {
             try {
               navigator.clipboard.write([
                 new ClipboardItem({ 'image/png': blob })
               ]).then(() => {
-                alert('✨ Certificado gerado com sucesso!\nA imagem foi copiada automaticamente para a sua área de transferência (Ctrl+V).');
+                alert('✨ Ordem de Operação emitida com sucesso!\nA imagem tática foi copiada automaticamente para a sua área de transferência (Ctrl+V).');
               }).catch(err => {
-                console.error("Erro na cópia automática: ", err);
-                alert('Certificado gerado na tela abaixo! (Houve um problema de permissão no navegador para auto-copiar).');
+                console.error("Falha no clipboard automático: ", err);
+                alert('Documento gerado na tela abaixo! (Sem permissão para cópia automática no navegador).');
               });
             } catch (e) {
-              alert('Certificado gerado na tela abaixo! Use o clique do mouse para salvá-lo.');
+              alert('Documento tático gerado com sucesso na tela abaixo!');
             }
           }
         }, 'image/png');
-        // Rola suavemente até a imagem gerada
+
         setTimeout(() => {
             imagemGerada.scrollIntoView({behavior: 'smooth', block: 'start'});
         }, 300);
