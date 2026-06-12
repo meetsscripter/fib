@@ -264,6 +264,8 @@
       height: 100%;
       object-fit: cover;
       display: block;
+      /* Fusão que remove fundos brancos automaticamente */
+      mix-blend-mode: multiply;
     }
 
     .insignia-placeholder {
@@ -381,7 +383,15 @@
     <label for="endereco">Citação do Mérito (Texto de Justificativa):</label>
     <textarea id="endereco" placeholder="Descreva os feitos e o motivo do reconhecimento público..."></textarea>
 
-    <label for="input-insignia">Brasão, Medalha ou Foto (Imagem):</label>
+    <label for="select-selo-pronto">Escolher Selo Oficial Pronto:</label>
+    <select id="select-selo-pronto">
+      <option value="">-- Fazer upload personalizado abaixo --</option>
+      <option value="imagem/Logo.png">Selo Federal Clássico (FBI)</option>
+      <option value="imagem/swat.png">Selo de Operações Táticas (SWAT)</option>
+      <option value="imagem/CID.png">Selo de Investigação Geral (CID)</option>
+    </select>
+
+    <label for="input-insignia">Ou fazer Upload de Imagem Personalizada:</label>
     <input type="file" id="input-insignia" accept="image/*" />
 
     <div class="linha-assinatura">
@@ -407,10 +417,10 @@
 
     <img src="https://cdn.pixabay.com/photo/2013/07/12/14/10/pushpin-147918_640.png" alt="FBI Seal" class="logo-esq" crossorigin="anonymous" />
     <img src="https://cdn.pixabay.com/photo/2013/07/12/14/10/pushpin-147918_640.png" alt="DoJ Seal" class="logo-dir" crossorigin="anonymous" />
-    
+      
     <div class="novo-cabecalho">
       <p class="dept-name">U.S. DEPARTMENT OF JUSTICE</p>
-      <p class="bureau-name">FEDERAL INVESTIGATION BUREAU</p>
+      <p class="bureau-name">FEDERAL BUREAU OF INVESTIGATION</p>
       <p class="titulo">COMMENDATION FOR MERITORIOUS SERVICE</p>
     </div>
 
@@ -468,6 +478,7 @@
     const alvara = document.getElementById('alvara');
     const imagemGerada = document.getElementById('imagem-gerada');
     const inputInsignia = document.getElementById('input-insignia');
+    const selectSeloPronto = document.getElementById('select-selo-pronto');
     const areaInsignia = document.getElementById('area-insignia');
 
     // Inputs e áreas para resposta
@@ -492,17 +503,34 @@
       assinaturaTexto: document.getElementById('assinatura-texto'),
     };
 
-    // LÓGICA DO UPLOAD DA MEDALHA: Carrega a imagem e formata redondo
+    // Função interna para injetar o elemento de imagem na div circular
+    function aplicarSeloNaTela(origemUrl) {
+      areaInsignia.innerHTML = ''; 
+      const imgInsignia = document.createElement('img');
+      imgInsignia.src = origemUrl;
+      imgInsignia.className = 'insignia-imagem';
+      imgInsignia.setAttribute('crossorigin', 'anonymous');
+      areaInsignia.appendChild(imgInsignia);
+    }
+
+    // LÓGICA DO MENU DE SELOS PRONTOS
+    selectSeloPronto.addEventListener('change', function() {
+      if (this.value) {
+        inputInsignia.value = ''; // Limpa o upload para evitar conflitos
+        aplicarSeloNaTela(this.value);
+      } else {
+        areaInsignia.innerHTML = '<span class="insignia-placeholder" id="insignia-status">Insira a Medalha ou Selo da Unidade</span>';
+      }
+    });
+
+    // LÓGICA DO UPLOAD DA MEDALHA MANUAL
     inputInsignia.addEventListener('change', function() {
       const arquivo = this.files[0];
       if (arquivo) {
+        selectSeloPronto.value = ''; // Reseta o menu de prontos
         const leitor = new FileReader();
         leitor.onload = function(e) {
-          areaInsignia.innerHTML = ''; 
-          const imgInsignia = document.createElement('img');
-          imgInsignia.src = e.target.result;
-          imgInsignia.className = 'insignia-imagem';
-          areaInsignia.appendChild(imgInsignia);
+          aplicarSeloNaTela(e.target.result);
         };
         leitor.readAsDataURL(arquivo);
       }
