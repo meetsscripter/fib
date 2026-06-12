@@ -318,7 +318,7 @@
 
     <div class="novo-cabecalho">
       <p class="dept-name">U.S. DEPARTMENT OF JUSTICE</p>
-      <p class="bureau-name">FEDERAL INVESTIGATION BUREAU</p>
+      <p class="bureau-name">FEDERAL BUREAU OF INVESTIGATION</p>
       <p class="titulo" id="doc-titulo">FEDERAL FIREARM PERMIT</p>
     </div>
 
@@ -360,7 +360,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <script>
-    const btnGerar = document.getElementById('btn-gerar');
+const btnGerar = document.getElementById('btn-gerar');
     const alvara = document.getElementById('alvara');
     const imagemGerada = document.getElementById('imagem-gerada');
 
@@ -393,7 +393,8 @@
     inputs.nome.addEventListener('input', () => respostas.nome.textContent = inputs.nome.value || "Jack Reacher");
     inputs.rg.addEventListener('input', () => respostas.rg.textContent = inputs.rg.value || "FED-007.894.11X");
     
-    inputs.tipo.addEventListener('change', () => {
+    // 🌟 NOVA FUNÇÃO: Atualiza o layout baseado na seleção atual do formulário
+    function atualizarLayoutCertificado() {
       const selecao = inputs.tipo.value;
       
       if (selecao === "porte") {
@@ -407,7 +408,15 @@
         respostas.imgDinamica.src = imagensCertificado.curso;
         respostas.textoLegal.textContent = textosLegais.curso;
       }
-    });
+    }
+
+    // Escuta a mudança do select normalmente
+    inputs.tipo.addEventListener('change', atualizarLayoutCertificado);
+
+    // 🌟 GATILHO AUTOMÁTICO: Executa a função assim que a página abre para carregar a imagem correta de imediato
+    document.addEventListener('DOMContentLoaded', atualizarLayoutCertificado);
+    // Fallback caso o DOMContentLoaded já tenha passado no momento da renderização
+    atualizarLayoutCertificado();
 
     btnGerar.addEventListener('click', () => {
       window.scrollTo(0, 0);
@@ -456,5 +465,3 @@
   </script>
 </body>
 </html>
-
-```
