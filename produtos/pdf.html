@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>FBI Business Permit - Model</title>
+  <!-- Adicionando fontes do Google para um visual mais moderno -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Georgia&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: #0a0f1e; /* Azul muito escuro */
+      font-family: 'Roboto', sans-serif;
+      padding: 30px;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      min-height: 100vh;
+      margin: 0;
+      flex-wrap: wrap;
+    }
+
+    /* --- ESTILO DO FORMULÁRIO (Esquerda) --- */
+    .form-container {
+      width: 400px;
+      background: #ffffff;
+      border: 1px solid #d1d1d1;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      height: fit-content;
+      box-sizing: border-box;
+      margin-bottom: 30px;
+      border-top: 5px solid #002d62; /* Detalhe azul FBI */
+    }
+
+    .form-container h2 {
+      font-family: 'Roboto', sans-serif;
+      margin-top: 0;
+      margin-bottom: 25px;
+      font-weight: 700;
+      color: #002d62;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    label {
+      display: block;
+      margin-top: 18px;
+      font-weight: 700;
+      font-size: 13px;
+      color: #002d62;
+      text-transform: uppercase;
+      user-select: none;
+    }
+
+    input[type="text"], input[type="tel"], input[type="date"], select {
+      width: 100%;
+      padding: 10px 12px;
+      margin-top: 6px;
+      font-size: 15px;
+      border: 1px solid #b0bec5;
+      border-radius: 6px;
+      font-family: 'Roboto', sans-serif;
+      box-sizing: border-box;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      background-color: #fcfcfc;
+    }
+
+    input[type="text"]:focus, input[type="tel"]:focus, input[type="date"]:focus, select:focus {
+      border-color: #0056b3;
+      box-shadow: 0 0 0 3px rgba(0,86,179,0.15);
+      outline: none;
+    }
+
+    .linha-assinatura {
+      display: flex;
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    .linha-assinatura > div {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #btn-gerar {
+      display: block;
+      width: 100%;
+      margin: 30px auto 0;
+      padding: 15px;
+      background: #002d62; /* Azul FBI */
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.1s;
+      user-select: none;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    }
+    #btn-gerar:hover {
+      background: #001f44;
+    }
+    #btn-gerar:active {
+      transform: translateY(1px);
+    }
+
+    /* --- ESTILO DO DOCUMENTO DO FBI (Direita) --- */
+    .alvara {
+      width: 850px; /* Um pouco mais largo */
+      background: white;
+      padding: 60px 50px; /* Mais respiro */
+      box-sizing: border-box;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-height: 1100px;
+      font-family: 'Arial', sans-serif; /* Fonte limpa e oficial */
+      color: #000;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+      border: 2px solid #d1d1d1;
+      /* Marca d'água sutil no fundo (opcional, adicionei uma textura leve) */
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48ZyBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmMGYwZjAiIGZpbGwtb3BhY2l0eT0iMC40Ij48cGF0aCBkPSJNMCAwaDQwdjQwSDBWMHptMjAgMjBoMjB2MjBIMjBWMjB6TTAgMjBoMjB2MjBIMFYyMHoyMCAwaDIwdjIwSDIwVjB6Ii8+PC9nPjwvZz48L3N2Zz4=');
+    }
+
+    /* Faixa dourada e azul no topo */
+    .alvara::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 12px;
+      background: linear-gradient(90deg, #002d62 0%, #002d62 70%, #b3995d 70%, #b3995d 100%);
+    }
+
+    /* Logos Oficiais */
+    .logo-esq {
+      position: absolute;
+      top: 20px;
+      left: -30px;
+      width: 110px; /* Selo FBI */
+      height: auto;
+    }
+
+    .logo-dir {
+      position: absolute;
+      top: 20px;
+      right: 10px;
+      width: 100px; /* Selo DoJ */
+      height: auto;
+    }
+
+    /* Cabeçalho Federal */
+    .novo-cabecalho {
+      text-align: center;
+      margin-bottom: 60px;
+      user-select: none;
+      margin-top: 15px;
+      color: #002d62;
+      font-family: 'Georgia', serif;
+    }
+
+    .novo-cabecalho p {
+      margin: 4px 0;
+      font-weight: 400;
+      font-size: 16px;
+      letter-spacing: 0.5px;
+    }
+
+    .novo-cabecalho .dept-name {
+      font-weight: 700;
+      font-size: 18px;
+      text-transform: uppercase;
+    }
+
+    .novo-cabecalho .bureau-name {
+      font-weight: 700;
+      font-size: 26px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-top: 8px;
+    }
+
+    .novo-cabecalho .titulo {
+      font-size: 32px;
+      font-weight: 700;
+      margin-top: 35px;
+      letter-spacing: 1px;
+      color: #b3995d; /* Dourado */
+      text-transform: uppercase;
+      border-bottom: 2px solid #b3995d;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+
+    /* Linhas de dados - Estilo Ficha */
+    .linha {
+      display: flex;
+      gap: 0; /* Unir os blocos */
+      margin-bottom: -1px; /* Sobrepor bordas */
+      flex-wrap: nowrap;
+    }
+
+    .bloco {
+      flex: 1;
+      min-width: 120px;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #ccc; /* Bordas em cada campo */
+      padding: 10px 15px;
+      background-color: #fff;
+    }
+
+    /* Larguras específicas para dar ritmo */
+    .bloco-largo { flex: 2; }
+    .bloco-curto { flex: 0.7; }
+
+    .pergunta {
+      font-weight: 700;
+      font-size: 11px;
+      color: #555;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      user-select: none;
+    }
+
+    .resposta {
+      font-size: 16px;
+      font-weight: 400;
+      color: #000;
+      min-height: 22px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Seção de Texto Legal */
+    .observacoes {
+      text-align: justify;
+      margin-top: 50px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #222;
+      user-select: none;
+      background-color: #f9f9f9;
+      padding: 30px;
+      border: 1px solid #d1d1d1;
+      border-radius: 8px;
+    }
+
+    .observacoes strong {
+      color: #002d62;
+      font-size: 15px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .observacoes strong:nth-of-type(1) {
+      display: block;
+      margin-bottom: 15px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 5px;
+    }
+
+    .observacoes strong:nth-of-type(2) {
+      display: block;
+      margin-top: 30px; 
+      font-weight: 700;
+      color: #a31515; /* Vermelho escuro para ATENÇÃO */
+    }
+
+    .observacoes p {
+      margin: 0 0 12px 0;
+    }
+    .observacoes p:last-child { margin-bottom: 0; }
+
+    .observacoes span {
+      display: block;
+      margin-top: 8px;
+      font-weight: 400;
+      color: #a31515;
+    }
+
+    /* Assinatura Federal */
+    .assinatura-container {
+      margin-top: auto; /* Empurra para baixo */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding-top: 30px;
+      font-size: 16px;
+      font-weight: 400;
+      user-select: none;
+      border-top: 1px solid #eee; /* Linha sutil */
+    }
+
+    .assinatura-fonte {
+      font-family: "Segoe Script", "WindSong", cursive;
+      font-size: 32px;
+      color: #001f44;
+      font-weight: normal;
+      margin-bottom: 5px;
+    }
+
+    .assinatura-cargo {
+      font-size: 12px;
+      text-transform: uppercase;
+      color: #666;
+      letter-spacing: 1px;
+      margin-top: 2px;
+    }
+
+    /* Container imagem gerada */
+    #imagem-gerada {
+      margin-top: 30px;
+      text-align: center;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    #imagem-gerada img {
+      max-width: 100%;
+      height: auto;
+      border: 4px solid #fff;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- FORMULÁRIO (ESQUERDA) - FUNCIONALIDADES MANTIDAS -->
+  <div class="form-container">
+    <h2>Dados do Permissionário</h2>
+
+    <label for="proprietario">Nome Completo:</label>
+    <input type="text" id="proprietario" placeholder="Ex: John Doe" />
+
+    <label for="rg">Documento de Identidade (RG/ID):</label>
+    <input type="text" id="rg" placeholder="Número do documento" />
+
+    <label for="telefone">Telefone de Contato:</label>
+    <input type="tel" id="telefone" placeholder="(xx) xxxx-xxxx" />
+
+    <label for="atividade">Tipo de Atividade Comercial:</label>
+    <input type="text" id="atividade" placeholder="Ex: Consultoria, Varejo..." />
+
+    <label for="endereco">Endereço de Operação:</label>
+    <input type="text" id="endereco" placeholder="Endereço completo" />
+
+    <div class="linha-assinatura">
+      <div>
+        <label for="data">Data de Emissão:</label>
+        <input type="date" id="data" />
+      </div>
+      <div>
+        <label for="validade">Data de Validade:</label>
+        <input type="date" id="validade" />
+      </div>
+    </div>
+
+    <div class="linha-assinatura">
+      <div>
+        <label for="nome-assinatura">Autoridade Responsável:</label>
+        <input type="text" id="nome-assinatura" placeholder="Nome para assinatura" />
+      </div>
+      <div>
+        <label for="fonte-assinatura">Estilo da Assinatura:</label>
+        <select id="fonte-assinatura">
+          <option value='"Segoe Script", cursive'>Cursiva Padrão</option>
+          <option value='"Brush Script MT", cursive'>Brush</option>
+          <option value='"Dancing Script", cursive'>Dancing</option>
+          <option value='"Great Vibes", cursive'>Great Vibes</option>
+        </select>
+      </div>
+    </div>
+
+    <button id="btn-gerar">Gerar Documento Oficial</button>
+  </div>
+
+  <!-- DOCUMENTO FBI (DIREITA) - NOVO LAYOUT -->
+  <div class="alvara" id="alvara">
+
+    <!-- Logos Federais -->
+    <img src="https://cdn.pixabay.com/photo/2013/07/12/14/10/pushpin-147918_640.png" alt="FBI Seal" class="logo-esq" />
+    <img src="https://cdn.pixabay.com/photo/2013/07/12/14/10/pushpin-147918_640.png" alt="DoJ Seal" class="logo-dir" />
+    <!-- Cabeçalho Federal -->
+    <div class="novo-cabecalho">
+      <p class="dept-name">U.S. DEPARTMENT OF JUSTICE</p>
+      <p class="bureau-name">FEDERAL BUREAU OF INVESTIGATION</p>
+      <p class="titulo">BUSINESS OPERATION PERMIT</p>
+    </div>
+
+    <!-- Conteúdo em formato de Ficha (Grid de bordas) -->
+    <div class="linha">
+      <div class="bloco bloco-largo">
+        <div class="pergunta">PERMISSIONÁRIO / PROPRIETÁRIO:</div>
+        <div class="resposta" id="res-proprietario">J. Edgar Hoover</div>
+      </div>
+      <div class="bloco">
+        <div class="pergunta">ID / RG:</div>
+        <div class="resposta" id="res-rg">FED-987.654.321</div>
+      </div>
+    </div>
+
+    <div class="linha">
+      <div class="bloco">
+        <div class="pergunta">TELEFONE:</div>
+        <div class="resposta" id="res-telefone">(202) 324-3000</div>
+      </div>
+      <div class="bloco bloco-largo">
+        <div class="pergunta">ATIVIDADE AUTORIZADA:</div>
+        <div class="resposta" id="res-atividade">Specialized Security Services</div>
+      </div>
+    </div>
+
+    <div class="linha">
+      <div class="bloco bloco-largo">
+        <div class="pergunta">ENDEREÇO DE OPERAÇÃO:</div>
+        <div class="resposta" id="res-endereco">935 Pennsylvania Avenue NW, Washington, D.C.</div>
+      </div>
+      <div class="bloco bloco-curto">
+        <div class="pergunta">EMISSÃO:</div>
+        <div class="resposta" id="res-data">10/05/1924</div>
+      </div>
+      <div class="bloco bloco-curto">
+        <div class="pergunta">VALIDADE:</div>
+        <div class="resposta" id="res-validade">UNTIL REVOKED</div>
+      </div>
+    </div>
+
+    <!-- Seção de Termos e Condições (Português mantido) -->
+    <div class="observacoes">
+      <strong>TERMOS E CONDIÇÕES DE OPERAÇÃO</strong>
+      <p>Este documento constitui uma autorização federal de operação, emitida sob a égide do Departamento de Justiça dos Estados Unidos. A concessão deste alvará está estritamente condicionada à ausência de antecedentes criminais federais ou estaduais por parte de todos os proprietários e diretores da entidade autorizada.</p>
+      <p>O estabelecimento está sujeito a inspeções de segurança aleatórias e sem aviso prévio, conduzidas por agentes especiais do FBI ou técnicos autorizados, para garantir a conformidade com os protocolos de segurança nacional e prevenir atividades ilícitas.</p>
+      <p>É responsabilidade do permissionário manter todos os registros de funcionários e atividades comerciais atualizados e acessíveis à autoridade federal, mediante solicitação formal.</p>
+      <p>Qualquer violação das leis federais, ou a identificação de ameaças à ordem pública e segurança nacional emanadas do estabelecimento, resultará na revogação imediata desta autorização.</p>
+      <p>A taxa administrativa federal para a emissão e processamento deste alvará é de R$ 70.000,00 (setenta mil reais), com validade de 30 dias para a taxa de emissão, exigindo novo recolhimento para fins de renovação.</p>
+
+      <strong>NOTIFICAÇÃO DE REVOGAÇÃO:</strong>
+      <span>A inobservância de qualquer uma das condições listadas acima resultará no cancelamento automático e imediato deste documento, sem direito a recurso ou reembolso de taxas.</span>
+    </div>
+
+    <!-- Assinatura (Fundo) -->
+    <div class="assinatura-container">
+      <div class="assinatura-fonte" id="assinatura-texto">Merrick B. Garland</div>
+      <div class="assinatura-cargo">Autoridade Federal Responsável</div>
+      <div style="font-size: 10px; color: #999; margin-top: 5px;">FEDERAL BUREAU OF INVESTIGATION - OFFICIAL RELEASE</div>
+    </div>
+
+  </div>
+
+  <!-- Container para a imagem gerada (Abaixo de tudo) -->
+  <div id="imagem-gerada"></div>
+
+  <!-- Biblioteca para screenshot -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script>
+    // --- LÓGICA JAVASCRIPT ORIGINAL MANTIDA ---
+    const btnGerar = document.getElementById('btn-gerar');
+    const alvara = document.getElementById('alvara');
+    const imagemGerada = document.getElementById('imagem-gerada');
+
+    // Inputs e áreas para resposta
+    const inputs = {
+      proprietario: document.getElementById('proprietario'),
+      rg: document.getElementById('rg'),
+      telefone: document.getElementById('telefone'),
+      atividade: document.getElementById('atividade'),
+      endereco: document.getElementById('endereco'),
+      data: document.getElementById('data'),
+      validade: document.getElementById('validade'),
+      nomeAssinatura: document.getElementById('nome-assinatura'),
+      fonteAssinatura: document.getElementById('fonte-assinatura'),
+    };
+
+    const respostas = {
+      proprietario: document.getElementById('res-proprietario'),
+      rg: document.getElementById('res-rg'),
+      telefone: document.getElementById('res-telefone'),
+      atividade: document.getElementById('res-atividade'),
+      endereco: document.getElementById('res-endereco'),
+      data: document.getElementById('res-data'),
+      validade: document.getElementById('res-validade'),
+      assinaturaTexto: document.getElementById('assinatura-texto'),
+    };
+
+    // Atualiza respostas no alvará em tempo real
+    Object.keys(inputs).forEach(key => {
+      inputs[key].addEventListener('input', () => {
+        switch(key) {
+          case 'validade':
+            respostas.validade.textContent = inputs.validade.value ? formatDate(inputs.validade.value) : 'UNTIL REVOKED';
+            break;
+          case 'data':
+            respostas.data.textContent = inputs.data.value ? formatDate(inputs.data.value) : '';
+            break;
+          case 'nomeAssinatura':
+            respostas.assinaturaTexto.textContent = inputs.nomeAssinatura.value || ' ';
+            break;
+          case 'fonteAssinatura':
+            respostas.assinaturaTexto.style.fontFamily = inputs.fonteAssinatura.value;
+            break;
+          default:
+            if(respostas[key]) respostas[key].textContent = inputs[key].value;
+        }
+      });
+    });
+
+    // Formata data YYYY-MM-DD para DD/MM/YYYY
+    function formatDate(data) {
+      const d = new Date(data);
+      if(isNaN(d)) return '';
+      // Usando formatação local (brasileira) pois o texto legal está em PT-BR
+      return ('0' + (d.getDate() + 1)).slice(-2) + '/' + ('0'+(d.getMonth()+1)).slice(-2) + '/' + d.getFullYear();
+    }
+
+    // Evento botão gerar imagem
+    btnGerar.addEventListener('click', () => {
+      // Rola para o topo para garantir que o html2canvas pegue tudo sem cortes
+      window.scrollTo(0, 0);
+
+      html2canvas(alvara, {
+        scale: 2, // Alta qualidade
+        useCORS: true, // Tentar carregar imagens externas
+        allowTaint: true,
+        backgroundColor: "#ffffff" // Garante fundo branco na imagem
+      }).then(canvas => {
+        imagemGerada.innerHTML = ''; // Limpa geração anterior
+
+        const img = document.createElement('img');
+        img.src = canvas.toDataURL('image/png');
+        img.alt = 'Documento FBI Gerado';
+        img.style.cursor = 'pointer';
+        
+        // Mantém a funcionalidade de abrir em nova aba
+        img.addEventListener('click', () => {
+          const novaAba = window.open();
+          novaAba.document.write('<img src="' + img.src + '" style="max-width:100%;">');
+        });
+
+        imagemGerada.appendChild(img);
+        // Copiar para a área de transferência do usuário automaticamente
+        canvas.toBlob(blob => {
+          if (blob) {
+            try {
+              navigator.clipboard.write([
+                new ClipboardItem({ 'image/png': blob })
+              ]).then(() => {
+                alert('✨ Certificado gerado com sucesso!\nA imagem foi copiada automaticamente para a sua área de transferência (Ctrl+V).');
+              }).catch(err => {
+                console.error("Erro na cópia automática: ", err);
+                alert('Certificado gerado na tela abaixo! (Houve um problema de permissão no navegador para auto-copiar).');
+              });
+            } catch (e) {
+              alert('Certificado gerado na tela abaixo! Use o clique do mouse para salvá-lo.');
+            }
+          }
+        }, 'image/png');
+        // Rola suavemente até a imagem gerada
+        setTimeout(() => {
+            imagemGerada.scrollIntoView({behavior: 'smooth', block: 'start'});
+        }, 300);
+      });
+    });
+  </script>
+</body>
+</html>
