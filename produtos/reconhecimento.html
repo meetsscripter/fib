@@ -2,14 +2,14 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>FBI Commendation & Award - Model</title>
+  <title>FBI Commendation & Award - Model (Dark Edition)</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Georgia&display=swap" rel="stylesheet">
   <style>
     body {
-      background: #0a0f1e; /* Azul muito escuro */
+      background: #05070a; /* Fundo geral ultra escuro */
       font-family: 'Roboto', sans-serif;
       padding: 30px;
-      color: #333;
+      color: #e0e0e0;
       display: flex;
       justify-content: center;
       gap: 40px;
@@ -21,22 +21,22 @@
     /* --- ESTILO DO FORMULÁRIO (Esquerda) --- */
     .form-container {
       width: 400px;
-      background: #ffffff;
-      border: 1px solid #d1d1d1;
+      background: #121622;
+      border: 1px solid #2a3447;
       padding: 30px;
       border-radius: 12px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
       height: fit-content;
       box-sizing: border-box;
       margin-bottom: 30px;
-      border-top: 5px solid #002d62; /* Detalhe azul FBI */
+      border-top: 5px solid #b3995d; /* Detalhe Dourado */
     }
 
     .form-container h2 {
       margin-top: 0;
       margin-bottom: 25px;
       font-weight: 700;
-      color: #002d62;
+      color: #b3995d;
       text-align: center;
       text-transform: uppercase;
       letter-spacing: 1px;
@@ -47,7 +47,7 @@
       margin-top: 18px;
       font-weight: 700;
       font-size: 13px;
-      color: #002d62;
+      color: #8a99ad;
       text-transform: uppercase;
       user-select: none;
     }
@@ -57,12 +57,13 @@
       padding: 10px 12px;
       margin-top: 6px;
       font-size: 15px;
-      border: 1px solid #b0bec5;
+      border: 1px solid #2a3447;
       border-radius: 6px;
       font-family: 'Roboto', sans-serif;
       box-sizing: border-box;
       transition: border-color 0.3s;
-      background-color: #fcfcfc;
+      background-color: #1a202c;
+      color: #ffffff;
     }
 
     input[type="file"] {
@@ -76,7 +77,7 @@
     }
 
     input[type="text"]:focus, input[type="date"]:focus, textarea:focus, select:focus {
-      border-color: #0056b3;
+      border-color: #b3995d;
       outline: none;
     }
 
@@ -97,8 +98,8 @@
       width: 100%;
       margin: 30px auto 0;
       padding: 15px;
-      background: #1a1a1a; /* Preto oficial para premiação */
-      color: white;
+      background: #b3995d;
+      color: #000;
       border: none;
       border-radius: 8px;
       font-size: 16px;
@@ -106,18 +107,19 @@
       text-transform: uppercase;
       letter-spacing: 1px;
       cursor: pointer;
-      transition: background-color 0.3s;
+      transition: all 0.3s;
       user-select: none;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 10px rgba(179,153,93,0.3);
     }
     #btn-gerar:hover {
-      background: #b3995d; /* Muda para dourado no hover */
+      background: #d4b87b;
+      box-shadow: 0 6px 15px rgba(179,153,93,0.5);
     }
 
-    /* --- ESTILO DO DOCUMENTO DO FBI (Direita) --- */
+    /* --- ESTILO DO DOCUMENTO DO FBI DARK (Direita) --- */
     .alvara {
       width: 850px;
-      background: white;
+      background: #0f0f12; /* Fundo Preto Premium */
       padding: 60px 50px;
       box-sizing: border-box;
       position: relative;
@@ -125,10 +127,9 @@
       flex-direction: column;
       min-height: 1100px;
       font-family: 'Arial', sans-serif;
-      color: #000;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-      border: 2px solid #d1d1d1;
-      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48ZyBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmMGYwZjAiIGZpbGwtb3BhY2l0eT0iMC40Ij48cGF0aCBkPSJNMCAwaDQwdjQwSDBWMHptMjAgMjBoMjB2MjBIMjBWMjB6TTAgMjBoMjB2MjBIMFYyMHoyMCAwaDIwdjIwSDIwVjB6Ii8+PC9nPjwvZz48L3N2Zz4=');
+      color: #ffffff;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.8);
+      border: 2px solid #332a18;
     }
 
     .alvara::before {
@@ -138,7 +139,7 @@
       left: 0;
       width: 100%;
       height: 12px;
-      background: linear-gradient(90deg, #002d62 0%, #002d62 70%, #b3995d 70%, #b3995d 100%);
+      background: linear-gradient(90deg, #b3995d 0%, #d4b87b 50%, #b3995d 100%);
     }
 
     /* Logos Oficiais */
@@ -164,7 +165,7 @@
       margin-bottom: 40px;
       user-select: none;
       margin-top: 15px;
-      color: #002d62;
+      color: #ffffff;
       font-family: 'Georgia', serif;
     }
 
@@ -179,7 +180,7 @@
       font-weight: 700;
       font-size: 18px;
       text-transform: uppercase;
-      color: #1a1a1a;
+      color: #a0a0a0;
     }
 
     .novo-cabecalho .bureau-name {
@@ -188,7 +189,7 @@
       text-transform: uppercase;
       letter-spacing: 2px;
       margin-top: 8px;
-      color: #002d62;
+      color: #ffffff;
     }
 
     .novo-cabecalho .titulo {
@@ -203,7 +204,7 @@
       padding-bottom: 5px;
     }
 
-    /* Linhas de dados - Estilo Ficha */
+    /* Linhas de dados - Estilo Ficha Dark */
     .linha {
       display: flex;
       gap: 0;
@@ -216,9 +217,9 @@
       min-width: 120px;
       display: flex;
       flex-direction: column;
-      border: 1px solid #ccc;
+      border: 1px solid #2a2a33;
       padding: 10px 15px;
-      background-color: #fff;
+      background-color: #16161c;
     }
 
     .bloco-largo { flex: 2; }
@@ -227,7 +228,7 @@
     .pergunta {
       font-weight: 700;
       font-size: 11px;
-      color: #555;
+      color: #b3995d;
       margin-bottom: 6px;
       text-transform: uppercase;
       letter-spacing: 1px;
@@ -237,35 +238,31 @@
     .resposta {
       font-size: 16px;
       font-weight: 400;
-      color: #000;
+      color: #ffffff;
       min-height: 22px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    /* CONTAINER DA MEDALHA / INSÍGNIA DINÂMICA */
+    /* CONTAINER DA MEDALHA / INSÍGNIA (SEM BORDA E SEM CÍRCULO) */
     .container-insignia {
       margin: 30px auto;
-      border: 3px double #b3995d;
-      background-color: #fafafa;
-      border-radius: 50%; /* Transforma em medalha circular */
       width: 180px;
       height: 180px;
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow: hidden;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+      background: transparent;
+      border: none;
+      box-shadow: none;
     }
 
     .insignia-imagem {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
       display: block;
-      /* Fusão que remove fundos brancos automaticamente */
-      mix-blend-mode: multiply;
     }
 
     .insignia-placeholder {
@@ -276,25 +273,26 @@
       padding: 10px;
       text-transform: uppercase;
       letter-spacing: 1px;
+      border: 1px dashed #b3995d; /* Borda tracejada temporária para guiar a visualização */
+      border-radius: 8px;
     }
 
-    /* Seção de Citação de Mérito */
+    /* Seção de Citação de Mérito Dark */
     .observacoes {
       text-align: justify;
       margin-top: 10px;
       font-size: 15px;
       line-height: 1.7;
-      color: #222;
+      color: #dddddd;
       user-select: none;
-      background-color: #fffdf9; /* Tom levemente pergaminho */
+      background-color: #16161c;
       padding: 30px;
-      border: 1px solid #e3d2b6;
+      border: 1px solid #332a18;
       border-radius: 8px;
-      box-shadow: inset 0 0 10px rgba(179,153,93,0.05);
     }
 
     .observacoes strong {
-      color: #002d62;
+      color: #b3995d;
       font-size: 15px;
       text-transform: uppercase;
       letter-spacing: 1px;
@@ -311,7 +309,7 @@
 
     .observacoes p {
       margin: 0;
-      text-indent: 30px; /* Recuo clássico de parágrafo de certificado */
+      text-indent: 30px;
     }
 
     /* Assinatura Concedente */
@@ -325,13 +323,13 @@
       font-size: 16px;
       font-weight: 400;
       user-select: none;
-      border-top: 1px solid #eee;
+      border-top: 1px solid #2a2a33;
     }
 
     .assinatura-fonte {
       font-family: "Segoe Script", "WindSong", cursive;
       font-size: 32px;
-      color: #001f44;
+      color: #d4b87b;
       font-weight: normal;
       margin-bottom: 5px;
     }
@@ -339,7 +337,7 @@
     .assinatura-cargo {
       font-size: 12px;
       text-transform: uppercase;
-      color: #666;
+      color: #888;
       letter-spacing: 1px;
       margin-top: 2px;
     }
@@ -354,8 +352,8 @@
     #imagem-gerada img {
       max-width: 100%;
       height: auto;
-      border: 4px solid #fff;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      border: 2px solid #b3995d;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
       border-radius: 4px;
     }
   </style>
@@ -466,7 +464,7 @@
     <div class="assinatura-container">
       <div class="assinatura-fonte" id="assinatura-texto">Christopher A. Wray</div>
       <div class="assinatura-cargo">Diretor Executivo Geral - FBI</div>
-      <div style="font-size: 10px; color: #999; margin-top: 5px;">OFFICIAL MERIT AWARD - WASHINGTON D.C.</div>
+      <div style="font-size: 10px; color: #666; margin-top: 5px;">OFFICIAL MERIT AWARD - WASHINGTON D.C.</div>
     </div>
 
   </div>
@@ -566,22 +564,31 @@
     btnGerar.addEventListener('click', () => {
       window.scrollTo(0, 0);
 
+      // Oculta o placeholder caso não haja nenhuma imagem enviada
+      const temImagem = areaInsignia.querySelector('img');
+      if (!temImagem) {
+        areaInsignia.style.display = 'none';
+      }
+
       html2canvas(alvara, {
         scale: 2, 
         useCORS: true, 
         allowTaint: false, 
-        backgroundColor: "#ffffff" 
+        backgroundColor: "#0f0f12" 
       }).then(canvas => {
+        // Restaura a visualização da área após a captura
+        areaInsignia.style.display = 'flex';
+
         imagemGerada.innerHTML = '';
 
         const img = document.createElement('img');
         img.src = canvas.toDataURL('image/png');
-        img.alt = ' FBI Commendation Award';
+        img.alt = 'FBI Commendation Award';
         img.style.cursor = 'pointer';
         
         img.addEventListener('click', () => {
           const novaAba = window.open();
-          novaAba.document.write('<img src="' + img.src + '" style="max-width:100%;">');
+          novaAba.document.write('<body style="background:#000; display:flex; justify-content:center; align-items:center; min-height:100vh; margin:0;"><img src="' + img.src + '" style="max-width:100%;"></body>');
         });
 
         imagemGerada.appendChild(img);
