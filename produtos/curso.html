@@ -2,12 +2,12 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>FBI Certification - Model</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Georgia&display=swap" rel="stylesheet">
+  <title>FIB Certification - Model</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
   <style>
     body {
-      background: #0a0f1e;
-      font-family: 'Roboto', sans-serif;
+      background: #070913;
+      font-family: 'Inter', sans-serif;
       padding: 30px;
       color: #333;
       display: flex;
@@ -16,6 +16,7 @@
       min-height: 100vh;
       margin: 0;
       flex-wrap: wrap;
+      align-items: flex-start;
     }
 
     /* --- ESTILO DO FORMULÁRIO (Esquerda) --- */
@@ -59,7 +60,7 @@
       font-size: 15px;
       border: 1px solid #b0bec5;
       border-radius: 6px;
-      font-family: 'Roboto', sans-serif;
+      font-family: 'Inter', sans-serif;
       box-sizing: border-box;
       transition: border-color 0.3s;
       background-color: #fcfcfc;
@@ -70,16 +71,16 @@
       outline: none;
     }
 
-    #btn-gerar {
+    #btn-gerar, #btn-add, #btn-gerar-lote, #btn-limpar-lista {
       display: block;
       width: 100%;
-      margin: 30px auto 0;
-      padding: 15px;
+      margin: 12px auto 0;
+      padding: 14px;
       background: #002d62;
       color: white;
       border: none;
       border-radius: 8px;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1px;
@@ -88,23 +89,99 @@
       user-select: none;
       box-shadow: 0 4px 6px rgba(0,0,0,0.2);
     }
-    #btn-gerar:hover { background: #001f44; }
+    #btn-gerar:hover, #btn-add:hover, #btn-gerar-lote:hover { background: #001f44; }
+
+    #btn-add { background: #3a6fd1; }
+    #btn-add:hover { background: #2c58ad; }
+
+    #btn-limpar-lista {
+      background: #7a1f1f;
+      box-shadow: none;
+      font-size: 12px;
+      padding: 8px;
+    }
+    #btn-limpar-lista:hover { background: #591616; }
+
+    .divisor {
+      margin: 28px 0 8px;
+      border: none;
+      border-top: 1px dashed #b0bec5;
+    }
+
+    .lote-titulo {
+      font-weight: 700;
+      color: #002d62;
+      text-transform: uppercase;
+      font-size: 14px;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    #lista-registros {
+      max-height: 260px;
+      overflow-y: auto;
+      border: 1px solid #d1d1d1;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .registro-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 12px;
+      border-bottom: 1px solid #eee;
+      font-size: 13px;
+    }
+    .registro-item:last-child { border-bottom: none; }
+
+    .registro-info { line-height: 1.4; }
+    .registro-info .nome { font-weight: 700; color: #002d62; display: block; }
+    .registro-info .detalhe { color: #666; font-size: 11px; }
+
+    .registro-remover {
+      background: none;
+      border: none;
+      color: #a33;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 16px;
+      line-height: 1;
+      padding: 4px 8px;
+    }
+
+    .lista-vazia {
+      padding: 16px;
+      text-align: center;
+      color: #999;
+      font-size: 13px;
+      font-style: italic;
+    }
+
+    .progresso {
+      margin-top: 10px;
+      font-size: 12px;
+      text-align: center;
+      color: #002d62;
+      font-weight: 700;
+      min-height: 16px;
+    }
 
     /* --- ESTILO DO DOCUMENTO DE CERTIFICAÇÃO (Direita) --- */
     .alvara {
       width: 850px;
-      background: white;
-      padding: 60px 50px;
+      background: linear-gradient(145deg, #0d111a 0%, #080a0f 100%);
+      padding: 60px 60px;
       box-sizing: border-box;
       position: relative;
       display: flex;
       flex-direction: column;
       min-height: 1100px;
-      font-family: 'Arial', sans-serif;
-      color: #000;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-      border: 2px solid #d1d1d1;
-      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48ZyBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw =');
+      font-family: 'Inter', sans-serif;
+      color: #e2e8f0;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.7);
+      border: 1px solid #1e2638;
+      border-radius: 4px;
     }
 
     .alvara::before {
@@ -113,168 +190,183 @@
       top: 0;
       left: 0;
       width: 100%;
-      height: 12px;
-      background: linear-gradient(90deg, #002d62 0%, #002d62 70%, #b3995d 70%, #b3995d 100%);
+      height: 6px;
+      background: linear-gradient(90deg, #3a6fd1 0%, #60a5fa 50%, #c5a86f 100%);
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
     }
 
-    /* Logos Oficiais */
     .logo-esq {
       position: absolute;
-      top: 20px;
-      left: 20px;
-      width: 110px;
+      top: 25px;
+      left: 30px;
+      width: 85px;
       height: auto;
+      opacity: 0.85;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
     }
 
     .logo-dir {
       position: absolute;
-      top: 20px;
-      right: 20px;
-      width: 100px;
+      top: 25px;
+      right: 30px;
+      width: 80px;
       height: auto;
+      opacity: 0.85;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
     }
 
     .novo-cabecalho {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 45px;
       user-select: none;
-      margin-top: 15px;
-      color: #002d62;
-      font-family: 'Georgia', serif;
+      margin-top: 10px;
     }
 
     .novo-cabecalho p {
       margin: 4px 0;
       font-weight: 400;
-      font-size: 16px;
+      font-size: 13px;
+      letter-spacing: 2px;
+      color: #94a3b8;
     }
 
     .novo-cabecalho .dept-name {
-      font-weight: 700;
-      font-size: 18px;
+      font-weight: 600;
+      font-size: 14px;
       text-transform: uppercase;
+      color: #cbd5e1;
     }
 
     .novo-cabecalho .bureau-name {
       font-weight: 700;
-      font-size: 26px;
+      font-size: 24px;
       text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-top: 8px;
+      letter-spacing: 3px;
+      color: #ffffff;
+      margin-top: 6px;
     }
 
     .novo-cabecalho .titulo {
+      font-family: 'Playfair Display', serif;
       font-size: 32px;
       font-weight: 700;
-      margin-top: 35px;
-      letter-spacing: 1px;
-      color: #b3995d;
+      margin-top: 30px;
+      letter-spacing: 1.5px;
+      color: #c5a86f;
       text-transform: uppercase;
-      border-bottom: 2px solid #b3995d;
+      border-bottom: 1px solid rgba(197, 168, 111, 0.3);
       display: inline-block;
-      padding-bottom: 5px;
+      padding-bottom: 8px;
     }
 
-    /* Ficha de dados */
     .linha {
       display: flex;
-      margin-bottom: -1px;
+      margin-bottom: 12px;
+      gap: 12px;
+      align-items: stretch; /* Garante que os blocos da linha tenham exatamente a mesma altura */
     }
 
     .bloco {
       flex: 1;
       display: flex;
       flex-direction: column;
-      border: 1px solid #ccc;
-      padding: 12px 15px;
-      background-color: #fff;
+      justify-content: center; /* Centraliza verticalmente o conteúdo de ambos os blocos */
+      border: 1px solid #1a2234;
+      padding: 14px 18px;
+      background-color: rgba(18, 24, 38, 0.6);
+      border-radius: 6px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
     }
 
     .pergunta {
-      font-weight: 700;
-      font-size: 11px;
-      color: #555;
+      font-weight: 600;
+      font-size: 10px;
+      color: #64748b;
       margin-bottom: 6px;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 1.2px;
       user-select: none;
     }
 
     .resposta {
-      font-size: 18px;
-      font-weight: 400;
-      color: #000;
-      min-height: 24px;
+      font-size: 16px;
+      font-weight: 500;
+      color: #f1f5f9;
+      min-height: 22px;
+      letter-spacing: 0.3px;
     }
 
-    /* Área Central com a Imagem Dinâmica */
     .container-dinamico {
       display: flex;
       justify-content: center;
       align-items: center;
-      margin: 40px 0;
-      min-height: 160px;
+      margin: 35px 0;
+      min-height: 140px;
     }
 
     .imagem-dinamica {
-      max-height: 150px;
+      max-height: 130px;
       width: auto;
       object-fit: contain;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
     }
 
-    /* Seção de Texto Legal */
     .observacoes {
       text-align: justify;
-      font-size: 14px;
-      line-height: 1.6;
-      color: #222;
+      font-size: 13.5px;
+      line-height: 1.7;
+      color: #cbd5e1;
       user-select: none;
-      background-color: #f9f9f9;
-      padding: 30px;
-      border: 1px solid #d1d1d1;
-      border-radius: 8px;
+      background-color: rgba(18, 24, 38, 0.6);
+      padding: 25px 30px;
+      border: 1px solid #1a2234;
+      border-radius: 6px;
     }
 
     .observacoes strong {
-      color: #002d62;
-      font-size: 15px;
+      color: #93c5fd;
+      font-size: 13px;
       text-transform: uppercase;
       letter-spacing: 1px;
+      font-weight: 600;
     }
 
     .observacoes strong:nth-of-type(1) {
       display: block;
-      margin-bottom: 15px;
-      border-bottom: 1px solid #ccc;
-      padding-bottom: 5px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding-bottom: 8px;
+      color: #c5a86f;
     }
 
-    .observacoes p { margin: 0 0 12px 0; }
+    .observacoes p { margin: 0; }
 
-    /* Assinatura */
     .assinatura-container {
       margin-top: auto;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding-top: 30px;
-      font-size: 16px;
+      padding-top: 40px;
+      font-size: 15px;
       user-select: none;
     }
 
     .assinatura-fonte {
       font-family: "Segoe Script", "WindSong", cursive;
-      font-size: 32px;
-      color: #001f44;
-      margin-bottom: 5px;
+      font-size: 30px;
+      color: #e2e8f0;
+      margin-bottom: 6px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
     }
 
     .assinatura-cargo {
-      font-size: 12px;
+      font-size: 11px;
       text-transform: uppercase;
-      color: #666;
-      letter-spacing: 1px;
+      color: #64748b;
+      letter-spacing: 1.5px;
+      font-weight: 600;
     }
 
     #imagem-gerada {
@@ -286,8 +378,56 @@
     }
     #imagem-gerada img {
       max-width: 100%;
-      border: 4px solid #fff;
+      border: 2px solid #1e2638;
+      border-radius: 6px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    #galeria-lote {
+      width: 850px;
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .galeria-item {
+      background: #101522;
+      border: 1px solid #1e2638;
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .galeria-item-topo {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      color: #cfd8e8;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .galeria-item-botoes button {
+      background: #3a6fd1;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-left: 6px;
+    }
+    .galeria-item-botoes button:hover { background: #2c58ad; }
+
+    .galeria-item img {
+      width: 100%;
+      display: block;
+      border-radius: 6px;
     }
   </style>
 </head>
@@ -299,20 +439,34 @@
     <label for="nome">Nome do Cidadão:</label>
     <input type="text" id="nome" placeholder="Ex: Jack Reacher" />
 
-    <label for="rg">IDENTIFICAÇÃO:</label>
-    <input type="text" id="rg" placeholder="Número do registro" />
-
     <label for="tipo">Tipo de Certificação:</label>
     <select id="tipo">
       <option value="porte">Porte de Arma (Firearm Permit)</option>
       <option value="curso">Curso de Capacitação (Training Course)</option>
+      <option value="rifle1">Assault Rifle Authorization II (M4A4)</option>
+      <option value="rifle2">Assault Rifle Authorization I (Galil / SMGs)</option>
+      <option value="cnu">Crisis Negotiation Unit (CNU)</option>
+      <option value="noose">National Office of Security Enforcement (NOOSE)</option>
     </select>
 
     <button id="btn-gerar">Gerar Certificado</button>
+
+    <hr class="divisor" />
+
+    <div class="lote-titulo">Geração em Lote</div>
+
+    <button id="btn-add">+ Adicionar à lista</button>
+
+    <div id="lista-registros">
+      <div class="lista-vazia" id="lista-vazia-msg">Nenhum registro adicionado ainda.</div>
+    </div>
+
+    <button id="btn-gerar-lote">Gerar todos os certificados</button>
+    <button id="btn-limpar-lista">Limpar lista</button>
+    <div class="progresso" id="progresso-lote"></div>
   </div>
 
   <div class="alvara" id="alvara">
-    <!-- Links substituídos por logos hospedados no Wikimedia para evitar bloqueios de CORS e crossorigin adicionado -->
     <img src="https://cdn.pixabay.com/photo/2013/07/12/14/10/pushpin-147918_640.png" alt="FBI Seal Left" class="logo-esq" />
     <img src="https://cdn.pixabay.com/photo/2013/07/12/14/10/pushpin-147918_640.png" alt="FBI Seal Right" class="logo-dir" />
 
@@ -328,14 +482,8 @@
         <div class="resposta" id="res-nome">Jack Reacher</div>
       </div>
       <div class="bloco">
-        <div class="pergunta">REGISTRO / GOVERNMENT ID:</div>
-        <div class="resposta" id="res-rg">FED-007.894.11X</div>
-      </div>
-    </div>
-    <div class="linha">
-      <div class="bloco">
         <div class="pergunta">STATUS DA CERTIFICAÇÃO:</div>
-        <div class="resposta" id="res-tipo" style="font-weight: bold; color: #b3995d;">PORTE DE ARMA ATIVO</div>
+        <div class="resposta" id="res-tipo" style="font-weight: 600; color: #c5a86f;">PORTE DE ARMA ATIVO</div>
       </div>
     </div>
 
@@ -349,119 +497,293 @@
     </div>
 
     <div class="assinatura-container">
-      <div class="assinatura-fonte">Christopher A. Wray</div>
-      <div class="assinatura-cargo">Diretor Executivo Geral - FBI</div>
-      <div style="font-size: 10px; color: #999; margin-top: 5px;">DOCUMENTO EXPEDIDO VIA QUANTICO QUANTUM VERIFICATION SYSTEM</div>
+      <div class="assinatura-fonte">Jason Wray</div>
+      <div class="assinatura-cargo">Diretor Executivo Geral - FIB</div>
+      <div style="font-size: 10px; color: #475569; margin-top: 6px; letter-spacing: 1px;">DOCUMENTO EXPEDIDO VIA QUANTICO QUANTUM VERIFICATION SYSTEM</div>
     </div>
 
   </div>
 
   <div id="imagem-gerada"></div>
+  <div id="galeria-lote"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <script>
-const btnGerar = document.getElementById('btn-gerar');
+    const btnGerar = document.getElementById('btn-gerar');
+    const btnAdd = document.getElementById('btn-add');
+    const btnGerarLote = document.getElementById('btn-gerar-lote');
+    const btnLimparLista = document.getElementById('btn-limpar-lista');
+    const listaRegistrosEl = document.getElementById('lista-registros');
+    const listaVaziaMsg = document.getElementById('lista-vazia-msg');
+    const progressoEl = document.getElementById('progresso-lote');
     const alvara = document.getElementById('alvara');
     const imagemGerada = document.getElementById('imagem-gerada');
+    const galeriaLote = document.getElementById('galeria-lote');
 
     const inputs = {
       nome: document.getElementById('nome'),
-      rg: document.getElementById('rg'),
       tipo: document.getElementById('tipo')
     };
 
     const respostas = {
       nome: document.getElementById('res-nome'),
-      rg: document.getElementById('res-rg'),
       tipo: document.getElementById('res-tipo'),
       titulo: document.getElementById('doc-titulo'),
       imgDinamica: document.getElementById('img-dinamica'),
       textoLegal: document.getElementById('texto-legal')
     };
 
-    // Imagens atualizadas para links estáveis da Wikipédia (evita falhas de CORS no Canvas)
     const imagensCertificado = {
-      porte: "../imagem/porte.png", // Emblema de Arma
-      curso: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTe40teAeksQ59pyOLSTFxcWKk_dBgGaL_z1wzQdViKtQ&s=10" // Selo Academia FBI
+      porte: "../imagem/porte.png",
+      curso: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTe40teAeksQ59pyOLSTFxcWKk_dBgGaL_z1wzQdViKtQ&s=10",
+      rifle1: "../imagem/auth2.png",
+      rifle2: "../imagem/auth1.png",
+      cnu: "../imagem/cnu.png",
+      noose: "../imagem/noose.png"
     };
 
     const textosLegais = {
       porte: "O Diretor do Federal Investigation Bureau certifica que o indivíduo acima qualificado cumpriu com sucesso todos os requisitos de antecedentes criminais, exames psicotécnicos e balísticos, estando plenamente AUTORIZADO a portar armamento de calibres permitidos em território federal, em total conformidade com a Segunda Emenda e diretrizes de Segurança Nacional.",
-      curso: "O Conselho Acadêmico do Federal Investigation Bureau certifica para os devidos fins que o aluno acima nominado concluiu com aproveitamento máximo todos os módulos de instrução tática avançada, inteligência de campo e contra-medidas eletrônicas ministrados na Academia de Quantico."
+      curso: "O Conselho Acadêmico do Federal Investigation Bureau certifica para os devidos fins que o aluno acima nominado concluiu com aproveitamento máximo todos os módulos de instrução tática avançada, inteligência de campo e contra-medidas eletrônicas ministrados na Academia de Quantico.",
+      rifle1: "O Diretor do Federal Investigation Bureau certifica que o indivíduo acima qualificado está devidamente autorizado ao porte e uso do armamento M4A4 Carbine em operações táticas oficiais, mediante cumprimento dos requisitos de treinamento, recertificação anual e regras de engajamento estabelecidas pelo Departamento de Justiça.",
+      rifle2: "O Diretor do Federal Investigation Bureau certifica que o indivíduo acima qualificado está devidamente autorizado ao porte e uso de armamento Galil e submetralhadoras (SMGs) em operações táticas oficiais, mediante cumprimento dos requisitos de treinamento, recertificação anual e regras de engajamento estabelecidas pelo Departamento de Justiça.",
+      cnu: "O Diretor do Federal Investigation Bureau certifica que o indivíduo acima qualificado foi aprovado com excelência nos rigorosos exames de aptidão psicológica, gerenciamento de crises e negociação tática, estando plenamente INTEGRADO à Crisis Negotiation Unit (CNU), unidade de elite especializada em ocorrências de alta complexidade e crimes de grande escala.",
+      noose: "O Comando da Crisis Negotiation Unit certifica que o indivíduo acima qualificado concluiu com êxito o treinamento tático operacional, estando autorizado a atuar pelo National Office of Security Enforcement (N.O.O.S.E), subdivisão responsável pela execução das principais operações táticas convencionais e intervenções de alta prioridade."
+    };
+
+    const titulos = {
+      porte: "FEDERAL FIREARM PERMIT",
+      curso: "ACADEMIC CERTIFICATION",
+      rifle1: "Assault Rifle Authorization II",
+      rifle2: "Assault Rifle Authorization I",
+      cnu: "CRISIS NEGOTIATION UNIT",
+      noose: "National Office of Security Enforcement"
+    };
+
+    const statusTipo = {
+      porte: "PORTE DE ARMA ATIVO",
+      curso: "CURSO DE CAPACITAÇÃO CONCLUÍDO",
+      rifle1: "AUTORIZAÇÃO M4A4 ATIVA",
+      rifle2: "AUTORIZAÇÃO GALIL / SMGS ATIVA",
+      cnu: "OPERADOR TÁTICO · CNU",
+      noose: "OPERADOR TÁTICO · N.O.O.S.E"
+    };
+
+    const nomesLegiveis = {
+      porte: "Porte de Arma",
+      curso: "Curso de Capacitação",
+      rifle1: "Assault Rifle Authorization II (M4A4)",
+      rifle2: "Assault Rifle Authorization I (Galil / SMGs)",
+      cnu: "Crisis Negotiation Unit (CNU)",
+      noose: "National Office of Security Enforcement (NOOSE)"
     };
 
     inputs.nome.addEventListener('input', () => respostas.nome.textContent = inputs.nome.value || "Jack Reacher");
-    inputs.rg.addEventListener('input', () => respostas.rg.textContent = inputs.rg.value || "FED-007.894.11X");
-    
-    // 🌟 NOVA FUNÇÃO: Atualiza o layout baseado na seleção atual do formulário
-    function atualizarLayoutCertificado() {
-      const selecao = inputs.tipo.value;
-      
-      if (selecao === "porte") {
-        respostas.titulo.textContent = "FEDERAL FIREARM PERMIT";
-        respostas.tipo.textContent = "PORTE DE ARMA ATIVO";
-        respostas.imgDinamica.src = imagensCertificado.porte;
-        respostas.textoLegal.textContent = textosLegais.porte;
-      } else {
-        respostas.titulo.textContent = "ACADEMIC CERTIFICATION";
-        respostas.tipo.textContent = "CURSO DE CAPACITAÇÃO CONCLUÍDO";
-        respostas.imgDinamica.src = imagensCertificado.curso;
-        respostas.textoLegal.textContent = textosLegais.curso;
-      }
+
+    function atualizarLayoutCertificado(registro) {
+      const dados = registro || { nome: inputs.nome.value, tipo: inputs.tipo.value };
+      const selecao = dados.tipo;
+
+      respostas.nome.textContent = dados.nome || "Jack Reacher";
+      respostas.titulo.textContent = titulos[selecao];
+      respostas.tipo.textContent = statusTipo[selecao];
+      respostas.textoLegal.textContent = textosLegais[selecao];
+
+      return new Promise((resolve) => {
+        const novaImg = imagensCertificado[selecao];
+        if (respostas.imgDinamica.src === novaImg) {
+          resolve();
+          return;
+        }
+        const onLoadOrError = () => {
+          respostas.imgDinamica.removeEventListener('load', onLoadOrError);
+          respostas.imgDinamica.removeEventListener('error', onLoadOrError);
+          resolve();
+        };
+        respostas.imgDinamica.addEventListener('load', onLoadOrError);
+        respostas.imgDinamica.addEventListener('error', onLoadOrError);
+        respostas.imgDinamica.src = novaImg;
+      });
     }
 
-    // Escuta a mudança do select normalmente
-    inputs.tipo.addEventListener('change', atualizarLayoutCertificado);
-
-    // 🌟 GATILHO AUTOMÁTICO: Executa a função assim que a página abre para carregar a imagem correta de imediato
-    document.addEventListener('DOMContentLoaded', atualizarLayoutCertificado);
-    // Fallback caso o DOMContentLoaded já tenha passado no momento da renderização
+    inputs.tipo.addEventListener('change', () => atualizarLayoutCertificado());
+    document.addEventListener('DOMContentLoaded', () => atualizarLayoutCertificado());
     atualizarLayoutCertificado();
 
-    btnGerar.addEventListener('click', () => {
+    async function capturarAlvara() {
       window.scrollTo(0, 0);
-      
-      // Renderização do HTML para Canvas
-      html2canvas(alvara, {
+      const canvas = await html2canvas(alvara, {
         scale: 2,
         useCORS: true,
-        allowTaint: false, // Alterado para false para prevenir problemas com a área de transferência
-        backgroundColor: "#ffffff"
-      }).then(canvas => {
-        imagemGerada.innerHTML = '';
-        const img = document.createElement('img');
-        img.src = canvas.toDataURL('image/png');
-        
-        img.addEventListener('click', () => {
-          const novaAba = window.open();
-          novaAba.document.write('<img src="' + img.src + '" style="max-width:100%;">');
-        });
+        allowTaint: false,
+        backgroundColor: "#080a0f"
+      });
+      return canvas;
+    }
 
-        imagemGerada.appendChild(img);
-
-        // Copiar para a área de transferência do usuário automaticamente
-        canvas.toBlob(blob => {
-          if (blob) {
-            try {
-              navigator.clipboard.write([
-                new ClipboardItem({ 'image/png': blob })
-              ]).then(() => {
-                alert('✨ Certificado gerado com sucesso!\nA imagem foi copiada automaticamente para a sua área de transferência (Ctrl+V).');
-              }).catch(err => {
-                console.error("Erro na cópia automática: ", err);
-                alert('Certificado gerado na tela abaixo! (Houve um problema de permissão no navegador para auto-copiar).');
-              });
-            } catch (e) {
-              alert('Certificado gerado na tela abaixo! Use o clique do mouse para salvá-lo.');
-            }
+    async function copiarCanvas(canvas) {
+      return new Promise((resolve) => {
+        canvas.toBlob(async (blob) => {
+          if (!blob) { resolve(false); return; }
+          try {
+            await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
+            resolve(true);
+          } catch (e) {
+            resolve(false);
           }
         }, 'image/png');
-
-        setTimeout(() => {
-            imagemGerada.scrollIntoView({behavior: 'smooth', block: 'start'});
-        }, 300);
       });
+    }
+
+    btnGerar.addEventListener('click', async () => {
+      await atualizarLayoutCertificado();
+      const canvas = await capturarAlvara();
+      imagemGerada.innerHTML = '';
+      const img = document.createElement('img');
+      img.src = canvas.toDataURL('image/png');
+      img.title = "Clique para abrir em nova aba";
+      img.addEventListener('click', () => {
+        const novaAba = window.open();
+        novaAba.document.write('<img src="' + img.src + '" style="max-width:100%;">');
+      });
+      imagemGerada.appendChild(img);
+
+      const copiado = await copiarCanvas(canvas);
+      alert(copiado
+        ? '✨ Certificado gerado com sucesso!\nA imagem foi copiada automaticamente para a sua área de transferência (Ctrl+V).'
+        : 'Certificado gerado na tela abaixo! (Não foi possível copiar automaticamente, use o clique do mouse para salvá-lo).');
+
+      setTimeout(() => imagemGerada.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300);
     });
+
+    let registros = [];
+    let proximoId = 1;
+
+    function renderizarLista() {
+      listaRegistrosEl.innerHTML = '';
+      if (registros.length === 0) {
+        listaRegistrosEl.appendChild(listaVaziaMsg);
+        return;
+      }
+      registros.forEach((r) => {
+        const item = document.createElement('div');
+        item.className = 'registro-item';
+        item.innerHTML = `
+          <div class="registro-info">
+            <span class="nome">${escapeHtml(r.nome || 'Sem nome')}</span>
+            <span class="detalhe">${escapeHtml(nomesLegiveis[r.tipo])}</span>
+          </div>
+        `;
+        const btnRemover = document.createElement('button');
+        btnRemover.className = 'registro-remover';
+        btnRemover.textContent = '✕';
+        btnRemover.title = 'Remover';
+        btnRemover.addEventListener('click', () => {
+          registros = registros.filter(x => x.id !== r.id);
+          renderizarLista();
+        });
+        item.appendChild(btnRemover);
+        listaRegistrosEl.appendChild(item);
+      });
+    }
+
+    function escapeHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    btnAdd.addEventListener('click', () => {
+      const nome = inputs.nome.value.trim();
+      const tipo = inputs.tipo.value;
+
+      if (!nome) {
+        alert('Preencha o Nome antes de adicionar à lista.');
+        return;
+      }
+
+      registros.push({ id: proximoId++, nome, tipo });
+      renderizarLista();
+
+      inputs.nome.value = '';
+      respostas.nome.textContent = "Jack Reacher";
+      inputs.nome.focus();
+    });
+
+    btnLimparLista.addEventListener('click', () => {
+      if (registros.length === 0) return;
+      if (confirm('Remover todos os registros da lista?')) {
+        registros = [];
+        renderizarLista();
+        galeriaLote.innerHTML = '';
+      }
+    });
+
+    btnGerarLote.addEventListener('click', async () => {
+      if (registros.length === 0) {
+        alert('Adicione ao menos um registro à lista antes de gerar em lote.');
+        return;
+      }
+
+      btnGerarLote.disabled = true;
+      btnGerarLote.textContent = 'Gerando...';
+      galeriaLote.innerHTML = '';
+      imagemGerada.innerHTML = '';
+
+      for (let i = 0; i < registros.length; i++) {
+        const r = registros[i];
+        progressoEl.textContent = `Gerando ${i + 1} de ${registros.length}: ${r.nome}`;
+
+        await atualizarLayoutCertificado(r);
+        await new Promise(res => setTimeout(res, 60));
+        const canvas = await capturarAlvara();
+        const dataUrl = canvas.toDataURL('image/png');
+
+        const card = document.createElement('div');
+        card.className = 'galeria-item';
+
+        const topo = document.createElement('div');
+        topo.className = 'galeria-item-topo';
+        topo.innerHTML = `<span>${escapeHtml(r.nome)} · ${escapeHtml(nomesLegiveis[r.tipo])}</span>`;
+
+        const botoes = document.createElement('div');
+        botoes.className = 'galeria-item-botoes';
+
+        const btnCopiar = document.createElement('button');
+        btnCopiar.textContent = 'Copiar';
+        btnCopiar.addEventListener('click', async () => {
+          const ok = await copiarCanvas(canvas);
+          btnCopiar.textContent = ok ? 'Copiado!' : 'Falhou';
+          setTimeout(() => btnCopiar.textContent = 'Copiar', 1500);
+        });
+
+        const btnAbrir = document.createElement('button');
+        btnAbrir.textContent = 'Abrir';
+        btnAbrir.addEventListener('click', () => {
+          const novaAba = window.open();
+          novaAba.document.write('<img src="' + dataUrl + '" style="max-width:100%;">');
+        });
+
+        botoes.appendChild(btnCopiar);
+        botoes.appendChild(btnAbrir);
+        topo.appendChild(botoes);
+
+        const img = document.createElement('img');
+        img.src = dataUrl;
+
+        card.appendChild(topo);
+        card.appendChild(img);
+        galeriaLote.appendChild(card);
+      }
+
+      progressoEl.textContent = `Concluído: ${registros.length} certificado(s) gerado(s). Clique em "Copiar" em cada card para colar individualmente.`;
+      btnGerarLote.disabled = false;
+      btnGerarLote.textContent = 'Gerar todos os certificados';
+
+      setTimeout(() => galeriaLote.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300);
+    });
+
+    renderizarLista();
   </script>
 </body>
 </html>
